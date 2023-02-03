@@ -1,0 +1,95 @@
+
+PUT /bankingcustomers
+{
+  "settings": {
+"number_of_shards": 2,
+"number_of_replicas": 2
+  },
+  "mappings": {
+    "properties": {
+  "customerId":{
+"type": "integer"
+  },
+  "customerName":{
+"type": "text"
+  },
+  "customerSurName":{
+"type": "text"
+  },
+  "customerAddress":{
+"type": "text"
+  },
+  "contactNo":{
+"type": "long"
+  },
+  "email":{
+"type": "text"
+  },
+  "gender":{
+"type": "text"
+  },
+  "companyType":{
+"type": "text"
+  },
+  "password":{
+"type": "text"
+  },
+  "customerType":{
+"type": "text"
+  },
+  "accountId":{
+    "type": "long"
+  },
+  "openDate":{
+    "type":"date"
+  },
+  "ruuningTotal":{
+"type": "long"
+  },
+  "relation_type":{
+    "type": "join",
+    "relations":{
+      "customer":"account"
+    }
+  }
+}
+  }
+}
+
+GET /bankingcustomers/_mapping
+
+
+POST /bankingcustomers/_doc/123?routing=123
+{
+  
+  "customerId":1,
+  "customerName":"Parameswari",
+  "customerSurName":"Bala",
+  "customerType":"Platinum",
+  "email":"Parameswaribala@gmail.com",
+  "gender":"Female",
+  "password":"Test@123",
+  "contactNo":9952032862,
+  "customerAddress":"Chennai",
+  "relation_type":{
+    "name":"customer"
+  }
+
+}
+
+
+POST /bankingcustomers/_doc/1001?routing=123
+{
+  "accountId":2854858,
+  "runningTotal":45000,
+  "openDate":"2007-06-01",
+  "relation_type":{
+    "name":"account",
+    "customer":1
+    
+  }
+}
+
+
+
+GET /bankingcustomers/_doc/123
