@@ -1,0 +1,41 @@
+PUT /customers
+{
+  "settings": {
+"number_of_shards": 2,
+"number_of_replicas": 2
+  }, 
+  "mappings": {
+"properties": {
+  "customerId":{
+"type": "integer"
+  },
+  "customerName":{
+"type": "text"
+  },
+  "customerSurName":{
+"type": "text"
+  },
+  "customerAddress":{
+"type": "text"
+  },
+  "contactNo":{
+"type": "long"
+  },
+  "email":{
+"type": "text"
+  },
+  "gender":{
+"type": "text"
+  },
+  "companyType":{
+"type": "text"
+  },
+  "password":{
+"type": "text"
+  },
+  "customerType":{
+"type": "text"
+  }
+}
+  }
+}
