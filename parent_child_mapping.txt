@@ -93,7 +93,7 @@ POST /bankingcustomers/_doc/1001?routing=123
   "openDate":"2007-06-01",
   "relation_type":{
     "name":"account",
-    "customer":1
+    "customer":123
     
   }
 }
