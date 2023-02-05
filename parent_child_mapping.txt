@@ -6,6 +6,8 @@ PUT /bankingcustomers
 "number_of_replicas": 2
   },
   "mappings": {
+  "properties": {   
+  "customer":{  
     "properties": {
   "customerId":{
 "type": "integer"
@@ -36,7 +38,11 @@ PUT /bankingcustomers
   },
   "customerType":{
 "type": "text"
+  }
+  }
   },
+  "account":{
+  "properties":{
   "accountId":{
     "type": "long"
   },
@@ -45,8 +51,10 @@ PUT /bankingcustomers
   },
   "ruuningTotal":{
 "type": "long"
-  },
-  "relation_type":{
+  }
+  }
+  } ,
+  "customer_account":{
     "type": "join",
     "relations":{
       "customer":"account"
