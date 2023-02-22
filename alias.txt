@@ -1,0 +1,16 @@
+GET /_cat/indices
+
+
+POST /_aliases
+{
+  "actions": [
+    {
+      "add": {
+        "index": "order",
+        "alias": "rps_order"
+      }
+    }
+  ]
+}
+
+GET /_cat/aliases
