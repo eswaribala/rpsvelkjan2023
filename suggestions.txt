@@ -1,5 +1,7 @@
 curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/movies/_doc/_bulk?pretty" --data-binary "@marvel_movies_v2.json"
 
+curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/movies/_doc/_bulk?pretty" --data-binary "@marvel_movies_v2"
+
 PUT movies202
 {
   "mappings": {
@@ -11,9 +13,130 @@ PUT movies202
         },
         "year": {
           "type": "keyword"
+     
+
+PUT /movies202/_doc/1
+{
+   "name": {
+    "input": ["Iron Man"]
+  },
+  "year": 200
+
+# another movie
+
+POST /movies202/_doc/2
+{
+  "name": {
+    "input": ["Thor"]
+  },
+  "year": 2011
+}
+
+
+POST /movies202/_doc/3
+{
+  "name": {
+    "input": ["The Incredible Hulk"]
+  },
+  "year": 2008
+}
+
+
+POST /movies202/_doc/4
+{
+  "name": [{
+    "input": ["The Incredible Hulk"]
+  },
+  {
+    "input": ["Hulk"]
+  }],
+  "year": 2008
+}
+
+GET movies/marvels/_search
+{
+  "suggest": {
+    "movie-suggest": {
+      "prefix": "thor",
+      "completion": {
+        "field": "name"
+      }
+    }
+  }
+}
+
+GET movies/marvels/_search
+{
+  "suggest": {
+    "movie-suggest": {
+      "prefix": "iron man",
+      "completion": {
+        "field": "name"
+      }
+    }
+  }
+}
+
+GET movies/marvels/_search
+{
+  "suggest": {
+    "movie-suggest": {
+      "prefix": "iron man",
+      "completion": {
+        "field": "name",
+        "size": 1
+      }
+    }
+  }
+}
+
+GET movies/marvels/_search
+{
+  "suggest": {
+    "movie-suggest-fuzzy": {
+      "prefix": "captain amerca the",
+      "completion": {
+        "field": "name",
+        "fuzzy": {
+          "fuzziness": 1
         }
       }
     }
+  }
+}
+
+GET movies/marvels/_search
+{
+  "suggest": {
+    "movie-suggest": {
+      "prefix": "america",
+      "completion": {
+        "field": "name"
+      }
+    }
+  }
+}
+
+GET movies/marvels/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": {
+          "year": "2008"
+        }
+      }
+    }
+  },
+  "suggest": {
+    "movie-suggest": {
+      "prefix": "iron man",
+      "completion": {
+        "field": "name",
+        "fuzzy": {
+          "fuzziness": 1
+        }
+      }
     }
   }
 }
