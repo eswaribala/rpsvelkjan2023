@@ -1,1 +1,19 @@
 curl -H "Content-Type: application/json" -XPOST "http://localhost:9200/movies/_doc/_bulk?pretty" --data-binary "@marvel_movies_v2.json"
+
+PUT movies202
+{
+  "mappings": {
+    "properties": { 
+    "marvels": {
+      "properties": {
+        "name": {
+          "type": "completion"
+        },
+        "year": {
+          "type": "keyword"
+        }
+      }
+    }
+    }
+  }
+}
