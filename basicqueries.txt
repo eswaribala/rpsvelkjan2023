@@ -1,0 +1,60 @@
+GET _cluster/health
+GET _nodes/stats
+PUT Name-of-the-Index
+PUT favorite_candy
+POST Name-of-the-Index/_doc
+{
+  "field": "value"
+}
+
+POST favorite_candy/_doc
+{
+  "first_name": "Lisa",
+  "candy": "Sour Skittles"
+}
+
+PUT Name-of-the-Index/_doc/id-you-want-to-assign-to-this-document
+{
+  "field": "value"
+}
+
+PUT favorite_candy/_doc/1
+{
+  "first_name": "John",
+  "candy": "Starburst"
+}
+
+GET Name-of-the-Index/_doc/id-of-the-document-you-want-to-retrieve
+GET favorite_candy/_doc/1
+POST Name-of-the-Index/_update/id-of-the-document-you-want-to-update
+{
+  "doc": {
+    "field1": "value",
+    "field2": "value",
+  }
+} 
+
+POST favorite_candy/_update/1
+{
+  "doc": {
+    "candy": "M&M's"
+  }
+}
+DELETE Name-of-the-Index/_doc/id-of-the-document-you-want-to-delete
+
+DELETE favorite_candy/_doc/1
+
+Take Home Assignment
+Create an index called destinations.
+Pick five dream travel destinations. For each destination, index a document containing the name and the country.
+Read(GET) each document to check the content of the document.
+Update a field of a document.
+Read(GET) the updated document to ensure that the field has been updated.
+Delete a document of one place.
+Copy and paste the following request to return all documents from the destinations index. This is a great way to check whether all the CRUD operations you have performed thus far have worked!
+GET destinations/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
