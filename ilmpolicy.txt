@@ -34,5 +34,8 @@ PUT _template/datastream_template
   }
 }
 
+#explain policy
+
+GET datastream-*/_ilm/explain
 
 
